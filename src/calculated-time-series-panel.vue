@@ -236,7 +236,7 @@ async function obtainMultiseries(operands) {
 	const categorizedCollectionsLookup = Object.entries(collectionsLookup).map(
 		([collectionName, collectionArray]) => [collectionName, collectionArray.map(
 			entry => ({
-				category: formatDate(entry[props.timeFields.split(',').map(x => x.trim()).find(field => field.startsWith(collectionName + '.'))?.split('.')[1] || 'created_on'], props.precision),
+				category: formatDate(new Date(entry[props.timeFields.split(',').map(x => x.trim()).find(field => field.startsWith(collectionName + '.'))?.split('.')[1] || 'created_on']), props.precision),
 				...entry
 			})
 		)]
