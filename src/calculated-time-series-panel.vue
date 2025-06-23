@@ -390,7 +390,7 @@ async function setUpChart() {
 	</div> -->
 	<div class="calculated-time-series">
 		<p v-if="isLoading">Fetching data...</p>
-		<div v-else ref="calculatedTimeSeriesEl" />
+		<div ref="calculatedTimeSeriesEl" />
 	</div>
 </template>
 
