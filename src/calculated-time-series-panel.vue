@@ -161,6 +161,14 @@ async function obtainMultiseries(operands) {
 		console.log(JSON.parse(props.filters)[collectionName]);
 		const data = [];
 		const uniqueFieldNames = [...new Set(operands.filter(x => x.collectionName === collectionName).map(x => x.fieldName))];
+
+		const timeFieldName = props.timeFields.split(',').map(x => x.trim()).find(field => field.startsWith(collectionName + '.'))?.split('.')[1] || 'created_on';
+		if (timeFieldName) {
+			if (!uniqueFieldNames.includes(timeFieldName)) {
+				uniqueFieldNames.push(timeFieldName);
+			}
+		}
+
 		const response = await api.get(`/items/${collectionName}`, {
 			params: {
 							limit: '-1',
