@@ -182,6 +182,12 @@ function generateCategories(precision: string, range: string): string[] {
 	return categories;
 }
 
+function removeTrailingString(input: string, unwantedTail: string): string {
+  return input.endsWith(unwantedTail)
+    ? input.slice(0, -unwantedTail.length)
+    : input;
+}
+
 /**
  * Returns an array of {timestampCategory, valueArray} objects,
  * where valueArray contains the values for each valueExpression that was evaluated 
@@ -255,6 +261,27 @@ async function obtainMultiseries(operands) {
 	}, {});
 
 	console.log("Collections Partitions Lookup:", collectionsPartitionsLookup);
+
+	// const collectionLookupByCategory = categories.map(
+	// 	category => Object.entries(collectionsPartitionsLookup).map(
+	// 		([partitioningName, partitioning]) => [removeTrailingString(partitioningName, 'Partitioning'), partitioning[category]]
+	// 	).reduce((acc, [collectionName, collectionArray]) => {
+	// 		acc[collectionName] = collectionArray;
+	// 		return acc;
+	// 	}, {})
+	// )
+
+	const collectionLookupByCategory = categories.reduce((acc, category) => {
+		acc[category] = Object.entries(collectionsPartitionsLookup).map(
+			([partitioningName, partitioning]) => [removeTrailingString(partitioningName, 'Partitioning'), partitioning[category]]
+		).reduce((acc, [collectionName, collectionArray]) => {
+			acc[collectionName] = collectionArray;
+			return acc;
+		}, {});
+		return acc;
+	}, {});
+
+	console.log("Collection Lookup By Category:", collectionLookupByCategory);
 
 	const multiseries = [];
 
