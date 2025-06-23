@@ -305,15 +305,15 @@ async function obtainMultiseries(operands) {
 	// 	acc[category] = props.valueExpressions.map(valueExpresion => math.evaluate(valueExpression, ))
 	// })
 
-	const multiseries = Object.entries(collectionsLookupByCategory).reduce((acc, [_category, _collectionsLookup]) => {
+	const _multiseries = Object.entries(collectionsLookupByCategory).reduce((acc, [_category, _collectionsLookup]) => {
 		//acc[_category] = props.valueExpressions.split(',').map(x => x.trim()).map(valueExpression => valueExpression);
 		acc[_category] = props.valueExpressions.split(';').map(x => x.trim()).map(valueExpression => Number(math.evaluate(valueExpression, _collectionsLookup)));
 		return acc;
 	}, {});
 
-	console.log("Multiseries before zero trim:", multiseries);
+	console.log("Multiseries before zero trim:", _multiseries);
 
-	multiseries = trimZeros(multiseries);
+	const multiseries = trimZeros(_multiseries);
 
 	console.log("Multiseries after zero trim:", multiseries);
 
