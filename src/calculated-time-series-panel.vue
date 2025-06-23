@@ -226,9 +226,7 @@ async function obtainMultiseries(operands) {
 		collectionsLookup[collectionName] = data;
 	}
 
-	console.log("ABRACADABRA");
 	console.log(collectionsLookup);
-	console.log("ASASA");	
 	
 	// const _precision = 'hour';    // From your select
 	// const _range = '2 days';      // From your select
@@ -293,9 +291,7 @@ async function obtainMultiseries(operands) {
 		return acc;
 	}, {});
 
-	console.log("ABA");
 	console.log("Multiseries:", multiseries);
-	console.log("ZABA");
 
 	// for (const category of categories) {
 	// 	const filteredCollectionsLookup
@@ -329,13 +325,57 @@ async function setUpChart() {
 	sanitizeOperands(operands);
 	console.log("Operands:", operands);
 	const multiseries = await obtainMultiseries(operands);
-	//isLoading.value = false;
+	isLoading.value = false;
 	// chart.value = new ApexCharts(calculatedTimeSeriesEl.value, {
 		//TODO
 		//https://github.com/directus/directus/blob/main/app/src/panels/bar-chart/panel-bar-chart.vue
 		//https://github.com/directus/directus/blob/main/app/src/panels/time-series/panel-time-series.vue
 		//multiple bars and colors
 	// });
+	chart.value = new ApexCharts(calculatedTimeSeriesEl.value, {
+		chart: {
+      type: props.chartType,
+      height: 400
+    },
+		// series: Object.entries(multiseries).map(([category, valueArray]) => ({
+		// 	name: category,
+		// 	data: valueArray
+		// })),
+		series: [...Array(props.valueExpressions.split(';').length).keys()].map(i => ({
+			name: props.valueLabels.split(',')[i]?.trim() || `Series ${i + 1}`,
+			data: Object.values(multiseries).map(entry => entry[i])
+		})),
+		colors: props.colors.split(',').map(color => color.trim()),
+		xaxis: {
+			categories: Object.keys(multiseries),
+			// title: {
+			// 	text: props.timeFields.split(',').map(x => x.trim()).join(', ') || 'Time'
+			// }
+		},
+		// yaxis: {
+
+		// },
+		plotOptions: {
+      bar: {
+        horizontal: false,
+        columnWidth: '60%',
+        dataLabels: {
+          position: 'top'
+        }
+      }
+    },
+		dataLabels: {
+      enabled: true,
+      offsetY: -20,
+      style: {
+        fontSize: '12px',
+        colors: ["#304758"]
+      }
+    }
+	});
+
+	//await chart.value.render();
+	chart.value.render();
 }
 
 </script>
