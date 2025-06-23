@@ -183,7 +183,7 @@ function generateCategories(precision: string, range: string): string[] {
 }
 
 /**
- * Returns an array of {timstamp, valueArray} objects,
+ * Returns an array of {timestampCategory, valueArray} objects,
  * where valueArray contains the values for each valueExpression that was evaluated 
  */
 async function obtainMultiseries(operands) {
@@ -220,15 +220,39 @@ async function obtainMultiseries(operands) {
 		collectionsLookup[collectionName] = data;
 	}
 
-	console.log("ABRACADABRA");
-	console.log(collectionsLookup);
-	console.log("ASASA");	
+	// console.log("ABRACADABRA");
+	// console.log(collectionsLookup);
+	// console.log("ASASA");	
 	
-	const _precision = 'hour';    // From your select
-	const _range = '2 days';      // From your select
-	const _categories = generateCategories(_precision, _range);
-	console.log("_Categories:", _categories);
-	console.log("BABABA");
+	// const _precision = 'hour';    // From your select
+	// const _range = '2 days';      // From your select
+	// const _categories = generateCategories(_precision, _range);
+	// console.log("_Categories:", _categories);
+	// console.log("BABABA");
+
+	const categories = generateCategories(props.precision, props.range);
+	console.log("Categories:", categories);
+	const multiseries = [];
+	// for (const category of categories) {
+	// 	const timestamp = new Date(category).getTime();
+	// 	const valueArray = operands.map(operand => {
+	// 		const collectionData = collectionsLookup[operand.collectionName] || [];
+	// 		const fieldValues = collectionData.map(item => get(item, operand.fieldName, null));
+	// 		const filteredValues = fieldValues.filter(value => value !== null && value !== undefined);
+	// 		if (filteredValues.length === 0) return null;
+
+	// 		// Evaluate the expression using mathjs
+	// 		try {
+	// 			return math.evaluate(operand.valueExpressions, { values: filteredValues });
+	// 		} catch (error) {
+	// 			console.error(`Error evaluating expression for ${operand.collectionName}.${operand.fieldName}:`, error);
+	// 			return null;
+	// 		}
+	// 	});
+	// 	multiseries.push({ category, valueArray });
+	// }
+
+	return multiseries;
 }
 
 async function setUpChart() { 
@@ -237,7 +261,7 @@ async function setUpChart() {
 	sanitizeOperands(operands);
 	console.log("Operands:", operands);
 	const multiseries = await obtainMultiseries(operands);
-	isLoading.value = false;
+	//isLoading.value = false;
 	// chart.value = new ApexCharts(calculatedTimeSeriesEl.value, {
 		//TODO
 		//https://github.com/directus/directus/blob/main/app/src/panels/bar-chart/panel-bar-chart.vue
