@@ -156,6 +156,8 @@ async function obtainMultiseries(operands) {
 	const collectionsLookup = {};
 	
 	for (const collectionName of uniqueCollectionNames) {
+		console.log("filter for collectionName:", collectionName);
+		console.log(JSON.parse(props.filters)[collectionName]);
 		const data = [];
 		const uniqueFieldNames = [...new Set(operands.filter(x => x.collectionName === collectionName).map(x => x.fieldName))];
 		const response = await api.get(`/items/${collectionName}`, {
@@ -185,7 +187,7 @@ async function setUpChart() {
 	const operands = getOperands(props)
 	sanitizeOperands(operands);
 	console.log("Operands:", operands);
-	//const multiseries = await obtainMultiseries(operands);
+	const multiseries = await obtainMultiseries(operands);
 	isLoading.value = false;
 	// chart.value = new ApexCharts(calculatedTimeSeriesEl.value, {
 		//TODO
