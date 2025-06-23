@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUpdated, onBeforeUnmount, onUnmounted, ref, computed, watch, CSSProperties } from 'vue';
 import { create, all } from 'mathjs';
+import { get } from 'lodash';
 import ApexCharts from 'apexcharts';
 import { useApi } from '@directus/extensions-sdk';
 
