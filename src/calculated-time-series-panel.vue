@@ -338,7 +338,7 @@ async function setUpChart() {
       //height: 400
 			height: '100%',
 			//foreColor: '#5439d2'
-			foreColor: '#5439d2'
+			foreColor: '#ffffff'
     },
 		// series: Object.entries(multiseries).map(([category, valueArray]) => ({
 		// 	name: category,
@@ -374,9 +374,9 @@ async function setUpChart() {
     },
 		dataLabels: {
       enabled: true,
-      offsetY: -40,
+      offsetY: -37,
       style: {
-        fontSize: '16px',
+        fontSize: '14px',
         //colors: ["#304758"]
 				colors: ["#ffffff"]
       }
