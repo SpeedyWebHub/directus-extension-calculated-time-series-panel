@@ -271,7 +271,7 @@ async function obtainMultiseries(operands) {
 	// 	}, {})
 	// )
 
-	const collectionLookupByCategory = categories.reduce((acc, category) => {
+	const collectionsLookupByCategory = categories.reduce((acc, category) => {
 		acc[category] = Object.entries(collectionsPartitionsLookup).map(
 			([partitioningName, partitioning]) => [removeTrailingString(partitioningName, 'Partitioning'), partitioning[category] || []]
 		).reduce((acc, [collectionName, collectionArray]) => {
@@ -281,11 +281,17 @@ async function obtainMultiseries(operands) {
 		return acc;
 	}, {});
 
-	console.log("Collection Lookup By Category:", collectionLookupByCategory);
+	console.log("Collection Lookup By Category:", collectionsLookupByCategory);
 
-	const multiseries = [];
+	// const multiseries = categories.reduce((acc, category) => {
+	// 	acc[category] = props.valueExpressions.map(valueExpresion => math.evaluate(valueExpression, ))
+	// })
 
+	const multiseries = Object.entries(collectionsLookupByCategory).reduce((acc, [_category, _collectionsLookup]) => {
+		acc[_category] = props.valueExpressions.split(',').map(x => x.trim()).map(valueExpression => math.evaluate(valueExpression, _collectionsLookup))
+	}, {});
 
+	console.log("Multiseries:", multiseries);
 
 	// for (const category of categories) {
 	// 	const filteredCollectionsLookup
