@@ -336,6 +336,7 @@ async function setUpChart() {
 		chart: {
       type: props.chartType,
       //height: 400
+			height: 0
     },
 		// series: Object.entries(multiseries).map(([category, valueArray]) => ({
 		// 	name: category,
