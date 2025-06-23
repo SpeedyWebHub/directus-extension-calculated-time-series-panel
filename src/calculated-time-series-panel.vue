@@ -335,7 +335,7 @@ async function setUpChart() {
 	chart.value = new ApexCharts(calculatedTimeSeriesEl.value, {
 		chart: {
       type: props.chartType,
-      height: 400
+      //height: 400
     },
 		// series: Object.entries(multiseries).map(([category, valueArray]) => ({
 		// 	name: category,
@@ -369,7 +369,8 @@ async function setUpChart() {
       offsetY: -20,
       style: {
         fontSize: '12px',
-        colors: ["#304758"]
+        //colors: ["#304758"]
+				colors: ["#5439d2"]
       }
     }
 	});
