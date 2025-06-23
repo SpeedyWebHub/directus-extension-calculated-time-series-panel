@@ -273,7 +273,7 @@ async function obtainMultiseries(operands) {
 
 	const collectionLookupByCategory = categories.reduce((acc, category) => {
 		acc[category] = Object.entries(collectionsPartitionsLookup).map(
-			([partitioningName, partitioning]) => [removeTrailingString(partitioningName, 'Partitioning'), partitioning[category]]
+			([partitioningName, partitioning]) => [removeTrailingString(partitioningName, 'Partitioning'), partitioning[category] || []]
 		).reduce((acc, [collectionName, collectionArray]) => {
 			acc[collectionName] = collectionArray;
 			return acc;
