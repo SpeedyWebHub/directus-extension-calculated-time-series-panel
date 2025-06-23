@@ -336,7 +336,8 @@ async function setUpChart() {
 		chart: {
       type: props.chartType,
       //height: 400
-			height: '100%'
+			height: '100%',
+			foreColor: '#F0F'
     },
 		// series: Object.entries(multiseries).map(([category, valueArray]) => ({
 		// 	name: category,
@@ -349,6 +350,11 @@ async function setUpChart() {
 		colors: props.colors.split(',').map(color => color.trim()),
 		xaxis: {
 			categories: Object.keys(multiseries),
+			labels: {
+				style: {
+					colors: ["#FFF"]
+				}
+			}
 			// title: {
 			// 	text: props.timeFields.split(',').map(x => x.trim()).join(', ') || 'Time'
 			// }
@@ -373,7 +379,7 @@ async function setUpChart() {
         //colors: ["#304758"]
 				colors: ["#5439d2"]
       }
-    }
+    },
 	});
 
 	try {
