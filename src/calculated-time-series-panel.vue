@@ -374,7 +374,11 @@ async function setUpChart() {
     }
 	});
 
-	//await chart.value.render();
+	try {
+		await chart.value.render();
+	} catch(error) {
+		console.error("Error rendering chart:", error);
+	}
 	//chart.value.render();
 }
 
