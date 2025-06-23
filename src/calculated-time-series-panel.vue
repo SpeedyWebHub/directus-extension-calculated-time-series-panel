@@ -4,6 +4,7 @@ import { create, all } from 'mathjs';
 import { get } from 'lodash';
 import ApexCharts from 'apexcharts';
 import { useApi } from '@directus/extensions-sdk';
+import { adjustDate } from './utils/adjust-date';
 
 const math = create(all);
 math.import({
@@ -148,6 +149,39 @@ onUnmounted(() => {
 	chart.value?.destroy();
 });
 
+function formatDate(date: Date, precision: string): string {
+	switch (precision) {
+		case 'second': return date.toISOString().slice(0, 19).replace('T', ' ');
+		case 'minute': return date.toISOString().slice(0, 16).replace('T', ' ');
+		case 'hour': return date.toISOString().slice(0, 13).replace('T', ' ') + ':00';
+		case 'day': return date.toISOString().slice(0, 10);
+		case 'week': return `Week of ${date.toISOString().slice(0, 10)}`;
+		case 'month': return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+		case 'year': return `${date.getFullYear()}`;
+		default: return date.toISOString();
+	}
+}
+
+function generateCategories(precision: string, range: string): string[] {
+	const now = new Date();
+	const start = adjustDate(now, `-${range}`);
+	if (!start) return [];
+
+	const categories: string[] = [];
+	let current = new Date(start);
+
+	while (current <= now) {
+		categories.push(formatDate(current, precision));
+
+		// Use adjustDate to move forward one precision unit
+		const next = adjustDate(current, `+1 ${precision}`);
+		if (!next || next <= current) break; // avoid infinite loops
+		current = next;
+	}
+
+	return categories;
+}
+
 /**
  * Returns an array of {timstamp, valueArray} objects,
  * where valueArray contains the values for each valueExpression that was evaluated 
@@ -189,6 +223,12 @@ async function obtainMultiseries(operands) {
 	console.log("ABRACADABRA");
 	console.log(collectionsLookup);
 	console.log("ASASA");	
+	
+	const _precision = 'hour';    // From your select
+	const _range = '2 days';      // From your select
+	const _categories = generateCategories(_precision, _range);
+	console.log("_Categories:", _categories);
+	console.log("BABABA");
 }
 
 async function setUpChart() { 
