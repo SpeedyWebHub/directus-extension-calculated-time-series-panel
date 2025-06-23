@@ -288,10 +288,13 @@ async function obtainMultiseries(operands) {
 	// })
 
 	const multiseries = Object.entries(collectionsLookupByCategory).reduce((acc, [_category, _collectionsLookup]) => {
-		acc[_category] = props.valueExpressions.split(',').map(x => x.trim()).map(valueExpression => math.evaluate(valueExpression, _collectionsLookup))
+		acc[_category] = props.valueExpressions.split(',').map(x => x.trim()).map(valueExpression => math.evaluate(valueExpression, _collectionsLookup));
+		return acc;
 	}, {});
 
+	console.log("ABA");
 	console.log("Multiseries:", multiseries);
+	console.log("ZABA");
 
 	// for (const category of categories) {
 	// 	const filteredCollectionsLookup
