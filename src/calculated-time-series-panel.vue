@@ -134,9 +134,9 @@ watch(
 
 		() => props.showHeader
 	],
-	() => {
+	async () => {
 		chart.value?.destroy();
-		setUpChart();
+		await setUpChart();
 	},
 	{ deep: true },
 );
@@ -151,7 +151,7 @@ onUnmounted(() => {
  * Returns an array of {timstamp, valueArray} objects,
  * where valueArray contains the values for each valueExpression that was evaluated 
  */
-function obtainMultiseries() {
+async function obtainMultiseries(operands) {
 	const uniqueCollectionNames = [...new Set(operands.map(x => x.collectionName))];
 	const collectionsLookup = {};
 	
@@ -180,11 +180,11 @@ function obtainMultiseries() {
 	console.log("ASASA");	
 }
 
-function setUpChart() { 
+async function setUpChart() { 
 	isLoading.value = true;
 	const operands = getOperands(props)
 	sanitizeOperands(operands);
-	const multiseries = obtainMultiseries();
+	const multiseries = await obtainMultiseries(operands);
 	isLoading.value = false;
 	// chart.value = new ApexCharts(calculatedTimeSeriesEl.value, {
 		//TODO
