@@ -375,7 +375,7 @@ async function setUpChart() {
 	});
 
 	//await chart.value.render();
-	chart.value.render();
+	//chart.value.render();
 }
 
 </script>
