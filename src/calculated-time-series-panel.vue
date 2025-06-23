@@ -184,7 +184,8 @@ async function setUpChart() {
 	isLoading.value = true;
 	const operands = getOperands(props)
 	sanitizeOperands(operands);
-	const multiseries = await obtainMultiseries(operands);
+	console.log("Operands:", operands);
+	//const multiseries = await obtainMultiseries(operands);
 	isLoading.value = false;
 	// chart.value = new ApexCharts(calculatedTimeSeriesEl.value, {
 		//TODO
