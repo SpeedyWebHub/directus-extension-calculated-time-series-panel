@@ -188,6 +188,26 @@ function removeTrailingString(input: string, unwantedTail: string): string {
     : input;
 }
 
+function trimZeros(input: Record<string, number[]>): Record<string, number[]> {
+  const entries = Object.entries(input);
+  
+  let start = 0;
+  while (start < entries.length && entries[start][1].every(v => v === 0)) {
+    start++;
+  }
+
+  let end = entries.length - 1;
+  while (end >= 0 && entries[end][1].every(v => v === 0)) {
+    end--;
+  }
+
+  const trimmed = entries.slice(start, end + 1);
+  const result = Object.fromEntries(trimmed);
+
+  // Preserve original if result is empty
+  return Object.keys(result).length === 0 ? input : result;
+}
+
 /**
  * Returns an array of {timestampCategory, valueArray} objects,
  * where valueArray contains the values for each valueExpression that was evaluated 
@@ -291,7 +311,11 @@ async function obtainMultiseries(operands) {
 		return acc;
 	}, {});
 
-	console.log("Multiseries:", multiseries);
+	console.log("Multiseries before zero trim:", multiseries);
+
+	multiseries = trimZeros(multiseries);
+
+	console.log("Multiseries after zero trim:", multiseries);
 
 	// for (const category of categories) {
 	// 	const filteredCollectionsLookup
