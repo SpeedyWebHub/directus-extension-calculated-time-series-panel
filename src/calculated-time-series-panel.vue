@@ -337,7 +337,7 @@ async function setUpChart() {
       type: props.chartType,
       //height: 400
 			height: '100%',
-			foreColor: '#F0F'
+			foreColor: '#5439d2'
     },
 		// series: Object.entries(multiseries).map(([category, valueArray]) => ({
 		// 	name: category,
@@ -350,11 +350,11 @@ async function setUpChart() {
 		colors: props.colors.split(',').map(color => color.trim()),
 		xaxis: {
 			categories: Object.keys(multiseries),
-			labels: {
-				style: {
-					colors: ["#FFF"]
-				}
-			}
+			// labels: {
+			// 	style: {
+			// 		colors: ["#FFF"]
+			// 	}
+			// }
 			// title: {
 			// 	text: props.timeFields.split(',').map(x => x.trim()).join(', ') || 'Time'
 			// }
@@ -373,11 +373,11 @@ async function setUpChart() {
     },
 		dataLabels: {
       enabled: true,
-      offsetY: -20,
+      offsetY: -32,
       style: {
-        fontSize: '12px',
+        fontSize: '24px',
         //colors: ["#304758"]
-				colors: ["#5439d2"]
+				colors: ["#ffffff"]
       }
     },
 	});
