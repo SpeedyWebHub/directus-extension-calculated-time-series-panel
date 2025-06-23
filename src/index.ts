@@ -51,8 +51,16 @@ export default definePanel({
 			meta: {
 				interface: 'select-dropdown',
 				options: {
-					line: 'Line Chart',
-					bar: 'Bar Chart',
+					choices: [
+						{
+							text: 'Line Chart',
+							value: 'line',
+						},
+						{
+							text: 'Bar Chart',
+							value: 'bar',
+						},
+					],
 				},
 				width: 'half',
 			},
