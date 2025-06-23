@@ -248,7 +248,7 @@ async function obtainMultiseries(operands) {
 	console.log("Categorized Collections Lookup:", categorizedCollectionsLookup);
 
 	const collectionsPartitionsLookup = Object.entries(categorizedCollectionsLookup).map(
-		([uniqueCollectionNames, collectionArray]) => [`${collectionName}Partitioning`, groupBy(collectionArray, 'category')]
+		([collectionName, collectionArray]) => [`${collectionName}Partitioning`, groupBy(collectionArray, 'category')]
 	).reduce((acc, [partitioningName, partitioning]) => {
 		acc[partitioningName] = partitioning;
 		return acc;
