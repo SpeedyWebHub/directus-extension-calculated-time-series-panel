@@ -47,4 +47,6 @@ Thanks to the `attr` function it is possible access any field of any available c
 
 Each expression is processed in the context of the current time interval. For example if the `sum` function is used in `valueExpressions`, and the precision is set to `month` then the sum is calculated over items corresponding to each of the individual months in the range. If the range is 12 months, then each of the `valueExpressions` expressions provided will be evaluated exactly 13 times (past 12 months + current month). The size of the time intervals is determined by the `precision` property which indicates the grouping behaviour of the data processing algorithm and the range is determined by the `range` property.
 
+Note: leading and trailing multiseries zero valu entries will be automatically removed from the chart to simplify the chart and improve readability, unless it would result in no data being displayed at all.
+
 
