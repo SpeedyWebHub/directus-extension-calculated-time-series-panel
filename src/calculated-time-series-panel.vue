@@ -288,7 +288,8 @@ async function obtainMultiseries(operands) {
 	// })
 
 	const multiseries = Object.entries(collectionsLookupByCategory).reduce((acc, [_category, _collectionsLookup]) => {
-		acc[_category] = props.valueExpressions.split(',').map(x => x.trim()).map(valueExpression => Number(math.evaluate(valueExpression, _collectionsLookup)));
+		//acc[_category] = props.valueExpressions.split(',').map(x => x.trim()).map(valueExpression => Number(math.evaluate(valueExpression, _collectionsLookup)));
+		acc[_category] = props.valueExpressions.split(',').map(x => x.trim()).map(valueExpression => valueExpression);
 		return acc;
 	}, {});
 
