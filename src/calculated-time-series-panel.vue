@@ -232,6 +232,21 @@ async function obtainMultiseries(operands) {
 
 	const categories = generateCategories(props.precision, props.range);
 	console.log("Categories:", categories);
+
+	const categorizedCollectionsLookup = Object.entries(collectionsLookup).map(
+		([collectionName, collectionArray]) => [collectionName, collectionArray.map(
+			entry => ({
+				category: formatDate(entry[props.timeFields.split(',').map(x => x.trim()).find(field => field.startsWith(collectionName + '.'))?.split('.')[1] || 'created_on'], props.precision),
+				...entry
+			})
+		)]
+	).reduce((acc, [collectionName, collectionArray]) => {
+		acc[collectionName] = collectionArray;
+		return acc;
+	}, {});
+
+	console.log("Categorized Collections Lookup:", categorizedCollectionsLookup);
+
 	const multiseries = [];
 
 
