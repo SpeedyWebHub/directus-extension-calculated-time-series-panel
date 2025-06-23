@@ -337,6 +337,7 @@ async function setUpChart() {
       type: props.chartType,
       //height: 400
 			height: '100%',
+			//foreColor: '#5439d2'
 			foreColor: '#5439d2'
     },
 		// series: Object.entries(multiseries).map(([category, valueArray]) => ({
@@ -373,9 +374,9 @@ async function setUpChart() {
     },
 		dataLabels: {
       enabled: true,
-      offsetY: -32,
+      offsetY: -40,
       style: {
-        fontSize: '24px',
+        fontSize: '16px',
         //colors: ["#304758"]
 				colors: ["#ffffff"]
       }
