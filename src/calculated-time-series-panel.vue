@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUpdated, onBeforeUnmount, onUnmounted, ref, computed, watch, CSSProperties } from 'vue';
 import { create, all } from 'mathjs';
-import { get } from 'lodash';
+import { get, groupBy } from 'lodash';
 import ApexCharts from 'apexcharts';
 import { useApi } from '@directus/extensions-sdk';
 import { adjustDate } from './utils/adjust-date';
@@ -220,9 +220,9 @@ async function obtainMultiseries(operands) {
 		collectionsLookup[collectionName] = data;
 	}
 
-	// console.log("ABRACADABRA");
-	// console.log(collectionsLookup);
-	// console.log("ASASA");	
+	console.log("ABRACADABRA");
+	console.log(collectionsLookup);
+	console.log("ASASA");	
 	
 	// const _precision = 'hour';    // From your select
 	// const _range = '2 days';      // From your select
@@ -233,6 +233,13 @@ async function obtainMultiseries(operands) {
 	const categories = generateCategories(props.precision, props.range);
 	console.log("Categories:", categories);
 	const multiseries = [];
+
+
+
+	// for (const category of categories) {
+	// 	const filteredCollectionsLookup
+	// }
+
 	// for (const category of categories) {
 	// 	const timestamp = new Date(category).getTime();
 	// 	const valueArray = operands.map(operand => {
