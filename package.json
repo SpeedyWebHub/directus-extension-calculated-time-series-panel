@@ -2,12 +2,20 @@
 	"name": "directus-extension-calculated-time-series-panel",
 	"description": "This is a Directus extension providing a flexible panel that can display a time series chart based on calculated values with support for grouping and filtering.",
 	"icon": "extension",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"keywords": [
 		"directus",
 		"directus-extension",
 		"directus-extension-panel"
 	],
+	"author": {
+	  "name": "speedyweb",
+	  "email": "biuro@speedyweb.pl"
+	},
+	"repository": {
+	  "type": "git",
+	  "url": "https://github.com/SpeedyWebHub/directus-extension-calculated-time-series-panel"
+	},
 	"type": "module",
 	"files": [
 		"dist"
